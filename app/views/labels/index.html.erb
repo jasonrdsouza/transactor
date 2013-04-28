@@ -1,0 +1,23 @@
+<h1>Listing labels</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Details</th>
+    <th>Modify</th>
+    <th>Delete</th>
+  </tr>
+
+<% @labels.each do |label| %>
+  <tr>
+    <td><%= label.name.humanize %></td>
+    <td><%= link_to 'Show', label %></td>
+    <td><%= link_to 'Edit', edit_label_path(label) %></td>
+    <td><%= link_to 'Destroy', label, method: :delete, data: { confirm: 'Are you sure? (this action has been disabled)' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Label', new_label_path %>
