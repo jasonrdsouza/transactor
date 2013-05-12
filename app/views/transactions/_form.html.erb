@@ -12,8 +12,28 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :amount %><br />
+    <%= f.label :date, 'Date of the transaction (yyyy-mm-dd)' %><br />
+    <%= f.text_field :date %>
+  </div>
+  <div class="field">
+    <%= f.label :lender %><br />
+    <%= f.collection_select(:lender_id, User.all, :id, :name, :prompt => true) %>
+  </div>
+  <div class="field">
+    <%= f.label :debtor %><br />
+    <%= f.collection_select(:debtor_id, User.all, :id, :name, :prompt => true) %>
+  </div>
+  <div class="field">
+    <%= f.label :label %><br />
+    <%= f.collection_select(:label_id, Label.all, :id, :name, :prompt => true) %>
+  </div>
+  <div class="field">
+    <%= f.label :amount, 'Amount (in cents)' %><br />
     <%= f.number_field :amount %>
+  </div>
+  <div class="field">
+    <%= f.label :comment %><br />
+    <%= f.text_field :comment %>
   </div>
   <div class="actions">
     <%= f.submit %>
