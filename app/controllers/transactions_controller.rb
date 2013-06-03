@@ -33,9 +33,9 @@ class TransactionsController < ApplicationController
   end
 
   # GET /transactions/1/edit
-  def edit
-    @transaction = Transaction.find(params[:id])
-  end
+  # def edit
+  #   @transaction = Transaction.find(params[:id])
+  # end
 
   # POST /transactions
   # POST /transactions.json
@@ -44,6 +44,10 @@ class TransactionsController < ApplicationController
 
     respond_to do |format|
       if @transaction.save
+
+        update_user_balance(@transaction.lender, @transaction.amount)
+        update_user_balance(@transaction.debtor, -@transaction.amount)
+
         format.html { redirect_to @transaction, notice: 'Transaction was successfully created.' }
         format.json { render json: @transaction, status: :created, location: @transaction }
       else
@@ -55,24 +59,28 @@ class TransactionsController < ApplicationController
 
   # PUT /transactions/1
   # PUT /transactions/1.json
-  def update
-    @transaction = Transaction.find(params[:id])
+  # def update
+  #   @transaction = Transaction.find(params[:id])
 
-    respond_to do |format|
-      if @transaction.update_attributes(params[:transaction])
-        format.html { redirect_to @transaction, notice: 'Transaction was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @transaction.errors, status: :unprocessable_entity }
-      end
-    end
-  end
+  #   respond_to do |format|
+  #     if @transaction.update_attributes(params[:transaction])
+  #       format.html { redirect_to @transaction, notice: 'Transaction was successfully updated.' }
+  #       format.json { head :no_content }
+  #     else
+  #       format.html { render action: "edit" }
+  #       format.json { render json: @transaction.errors, status: :unprocessable_entity }
+  #     end
+  #   end
+  # end
 
   # DELETE /transactions/1
   # DELETE /transactions/1.json
   def destroy
     @transaction = Transaction.find(params[:id])
+    
+    update_user_balance(@transaction.lender, -@transaction.amount)
+    update_user_balance(@transaction.debtor, @transaction.amount)
+
     @transaction.destroy
 
     respond_to do |format|
@@ -80,4 +88,12 @@ class TransactionsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  private
+  
+  def update_user_balance(user, amount)
+    user.balance += amount
+    user.save
+  end
+
 end

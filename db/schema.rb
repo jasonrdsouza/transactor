@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130512193206) do
+ActiveRecord::Schema.define(:version => 20130603013212) do
 
   create_table "labels", :force => true do |t|
     t.string   "name"
@@ -19,14 +19,27 @@ ActiveRecord::Schema.define(:version => 20130512193206) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "split_expenses", :force => true do |t|
+    t.integer  "lender_id"
+    t.integer  "debtor_id"
+    t.integer  "label_id"
+    t.integer  "amount"
+    t.string   "comment"
+    t.date     "ds"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "split_expenses", ["debtor_id"], :name => "index_split_expenses_on_debtor_id"
+  add_index "split_expenses", ["label_id"], :name => "index_split_expenses_on_label_id"
+  add_index "split_expenses", ["lender_id"], :name => "index_split_expenses_on_lender_id"
+
   create_table "transactions", :force => true do |t|
     t.integer  "amount"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
-    t.integer  "label_id"
     t.integer  "lender_id"
     t.integer  "debtor_id"
-    t.string   "comment"
     t.string   "date"
   end
 

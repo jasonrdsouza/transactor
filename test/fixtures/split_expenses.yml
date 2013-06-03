@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  lender: 
+  debtor: 
+  label: 
+  amount: 1
+  comment: MyString
+  ds: 2013-06-02
+
+two:
+  lender: 
+  debtor: 
+  label: 
+  amount: 1
+  comment: MyString
+  ds: 2013-06-02
