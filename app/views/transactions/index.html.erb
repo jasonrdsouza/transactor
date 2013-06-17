@@ -8,17 +8,23 @@
     <th>Debtor</th>
     <th>Amount</th>
     <th>Comment</th>
-    <th></th>
-    <th></th>
-    <th></th>
+    <th>Transaction Details</th>
+    <th>Edit Transaction</th>
+    <th>Delete Transaction</th>
   </tr>
 
 <% @transactions.each do |transaction| %>
   <tr>
+    <td><%= transaction.date %></td>
+    <td><%= transaction.label.name.humanize %></td>
+    <td><%= transaction.lender.name %></td>
+    <td><%= transaction.debtor.name %></td>
     <td><%= transaction.amount %></td>
+    <td><%= transaction.comment %></td>
     <td><%= link_to 'Show', transaction %></td>
     <td><%= link_to 'Edit', edit_transaction_path(transaction) %></td>
     <td><%= link_to 'Destroy', transaction, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td></td>
   </tr>
 <% end %>
 </table>

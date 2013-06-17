@@ -45,8 +45,7 @@ class TransactionsController < ApplicationController
     respond_to do |format|
       if @transaction.save
 
-        update_user_balance(@transaction.lender, @transaction.amount)
-        update_user_balance(@transaction.debtor, -@transaction.amount)
+        @transaction.process!
 
         format.html { redirect_to @transaction, notice: 'Transaction was successfully created.' }
         format.json { render json: @transaction, status: :created, location: @transaction }
@@ -78,22 +77,14 @@ class TransactionsController < ApplicationController
   def destroy
     @transaction = Transaction.find(params[:id])
     
-    update_user_balance(@transaction.lender, -@transaction.amount)
-    update_user_balance(@transaction.debtor, @transaction.amount)
+    @transaction.reverse!
 
     @transaction.destroy
 
     respond_to do |format|
-      format.html { redirect_to transactions_url }
+      format.html { redirect_to transactions_url, notice: 'Transaction was deleted successfully.' }
       format.json { head :no_content }
     end
-  end
-
-  private
-  
-  def update_user_balance(user, amount)
-    user.balance += amount
-    user.save
   end
 
 end

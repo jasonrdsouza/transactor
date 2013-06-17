@@ -1,9 +1,6 @@
 Transactor::Application.routes.draw do
 
 
-  resources :split_expenses
-
-
   resources :transactions, :users, :labels
 
 
