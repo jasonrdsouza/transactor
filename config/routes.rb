@@ -57,6 +57,9 @@ Transactor::Application.routes.draw do
   # just remember to delete public/index.html.
   root :to => 'home#index'
 
+  # enable: <%= link_to "Home", home_path %>
+  match '/' => "home#index", :as => :home
+
   # See how all your routes lay out with "rake routes"
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.
