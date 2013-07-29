@@ -25,4 +25,12 @@ class Transaction < ActiveRecord::Base
     debtor.save
   end
 
+  def dollar_amount
+    cents_per_dollar = 100
+    cents = amount % cents_per_dollar
+    dollars = amount / cents_per_dollar
+
+    "$#{dollars}.#{cents}"
+  end
+
 end

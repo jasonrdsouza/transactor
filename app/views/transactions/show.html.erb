@@ -1,9 +1,17 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Amount:</b>
-  <%= @transaction.amount %>
-</p>
+
+<div class="panel panel-primary">
+  <div class="panel-heading">Transaction Label: <%= @transaction.label.name.humanize%></div>
+  <p>Comments: <%= @transaction.comment%></p>
+
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item"><b>Amount:</b> <%= @transaction.dollar_amount %></li>
+    <li class="list-group-item"><b>Date:</b> <%= @transaction.date%></li>
+    <li class="list-group-item"><b>Lender:</b> <%= @transaction.lender.name%></li>
+    <li class="list-group-item"><b>Debtor:</b> <%= @transaction.debtor.name%></li>
+  </ul>
+</div>
 
 
 <%= link_to 'Edit', edit_transaction_path(@transaction) %> |

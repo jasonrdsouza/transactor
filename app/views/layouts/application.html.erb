@@ -2,57 +2,40 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Transactor</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="description" content="Easy way to manage shared expenses">
+    <meta name="author" content="Jason Dsouza">
+
+    <title>Transactor</title>
 
     <!-- Le styles -->
     <%= stylesheet_link_tag    'application' %>
 
-    <style type="text/css">
-      body {
-        padding-top: 20px;
-        padding-bottom: 40px;
-      }
-
-      /* Custom container */
-      .container-narrow {
-        margin: 0 auto;
-        max-width: 700px;
-      }
-      .container-narrow > hr {
-        margin: 30px 0;
-      }
-
-      /* Main marketing message and sign up button */
-      .jumbotron {
-        margin: 60px 0;
-        text-align: center;
-      }
-      .jumbotron h1 {
-        font-size: 72px;
-        line-height: 1;
-      }
-      .jumbotron .btn {
-        font-size: 21px;
-        padding: 14px 24px;
-      }
-
-      /* Supporting marketing content */
-      .marketing {
-        margin: 60px 0;
-      }
-      .marketing p + h4 {
-        margin-top: 28px;
-      }
-    </style>
-
+    <!-- Custom styles for this template -->
+    <link href="jumbotron-narrow.css" rel="stylesheet">
   </head>
 
   <body>
 
     <div class="container-narrow">
+
+      <div class="header">
+        <ul class="nav nav-pills pull-right">
+          <%= content_tag :li, :class => ('active' if current_page?(:controller => "home")) do %>
+            <%= link_to "Home", home_path %>
+          <% end %>
+          <%= content_tag :li, :class => ('active' if current_page?(:controller => "transactions")) do %>
+            <%= link_to "Transactions", transactions_path %>
+          <% end %>
+          <%= content_tag :li, :class => ('active' if current_page?(:controller => "labels")) do %>
+            <%= link_to "Labels", labels_path %>
+          <% end %>
+          <%= content_tag :li, :class => ('active' if current_page?(:controller => "users")) do %>
+            <%= link_to "Users", users_path %>
+          <% end %>
+        </ul>
+        <h3 class="muted">Transactor</h3>
+      </div>
 
       <%= yield %>
 
@@ -66,18 +49,7 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="../assets/js/jquery.js"></script>
-    <script src="../assets/js/bootstrap-transition.js"></script>
-    <script src="../assets/js/bootstrap-alert.js"></script>
-    <script src="../assets/js/bootstrap-modal.js"></script>
-    <script src="../assets/js/bootstrap-dropdown.js"></script>
-    <script src="../assets/js/bootstrap-scrollspy.js"></script>
-    <script src="../assets/js/bootstrap-tab.js"></script>
-    <script src="../assets/js/bootstrap-tooltip.js"></script>
-    <script src="../assets/js/bootstrap-popover.js"></script>
-    <script src="../assets/js/bootstrap-button.js"></script>
-    <script src="../assets/js/bootstrap-collapse.js"></script>
-    <script src="../assets/js/bootstrap-carousel.js"></script>
-    <script src="../assets/js/bootstrap-typeahead.js"></script>
+    <script src="../assets/js/bootstrap.js"></script>
 
   </body>
 </html>

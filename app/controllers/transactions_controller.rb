@@ -1,8 +1,11 @@
 class TransactionsController < ApplicationController
   # GET /transactions
   # GET /transactions.json
+
+  helper ApplicationHelper
+
   def index
-    @transactions = Transaction.all
+    @transactions = Transaction.all.sort_by{|t| t.date}.reverse
 
     respond_to do |format|
       format.html # index.html.erb
